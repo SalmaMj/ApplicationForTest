@@ -15,6 +15,14 @@ pipeline {
                 sh 'mvn clean compile'
             }
         }
+        stage('SonarQube Analysis') {
+    steps {
+        withSonarQubeEnv('Sonar') { 
+            sh 'mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN'
+        }
+    }
+}
+
     }
 }
 
